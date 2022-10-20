@@ -1,5 +1,5 @@
 import * as cdk from 'aws-cdk-lib';
-import { LayerVersion } from 'aws-cdk-lib/aws-lambda';
+import { Architecture, LayerVersion } from 'aws-cdk-lib/aws-lambda';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
@@ -13,7 +13,7 @@ export class ParameterStoreExtensionStack extends cdk.Stack {
       stringValue: "My Value"
     });
 
-    const layer = LayerVersion.fromLayerVersionArn(this, "paramLayer", "arn:aws:lambda:eu-west-1:015030872274:layer:AWS-Parameters-and-Secrets-Lambda-Extension:2");
+    const layer = LayerVersion.fromLayerVersionArn(this, "paramLayer", "arn:aws:lambda:eu-west-1:015030872274:layer:AWS-Parameters-and-Secrets-Lambda-Extension-Arm64:2");
 
     const retriever = new NodejsFunction(this, "function", {
       functionName: "ryan-cdk-param-extension",
@@ -22,7 +22,8 @@ export class ParameterStoreExtensionStack extends cdk.Stack {
       environment: {
         PARAM_NAME: parameter.parameterName
       },
-      layers: [layer]
+      layers: [layer],
+      architecture: Architecture.ARM_64
     });
 
     parameter.grantRead(retriever);
