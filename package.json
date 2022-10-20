@@ -1,0 +1,36 @@
+{
+  "name": "parameter-store-extension",
+  "version": "0.1.0",
+  "bin": {
+    "parameter-store-extension": "bin/parameter-store-extension.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk",
+    "assume-deploy": "aws sso login --profile ryandemo-deployment",
+    "diff": "cdk diff --profile ryandemo-deployment",
+    "synth": "cdk synth --profile ryandemo-deployment",
+    "deploy": "cdk deploy --all --profile ryandemo-deployment",
+    "destroy": "cdk destroy --all --profile ryandemo-deployment"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.5.2",
+    "@types/node": "10.17.27",
+    "@types/node-fetch": "^2.6.2",
+    "@types/prettier": "2.6.0",
+    "aws-cdk": "2.43.1",
+    "esbuild": "^0.15.12",
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.9.1",
+    "typescript": "~3.9.7"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.43.1",
+    "constructs": "^10.0.0",
+    "node-fetch": "^3.2.10",
+    "source-map-support": "^0.5.21"
+  }
+}
